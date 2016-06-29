@@ -16,6 +16,7 @@ class TweetsViewController: ViewController, UITableViewDataSource, UITableViewDe
     var isMoreDataLoading = false
     //var loadingMoreView: InfiniteScrollActivityView?
     
+    @IBOutlet weak var likeButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +41,7 @@ class TweetsViewController: ViewController, UITableViewDataSource, UITableViewDe
         tableView.insertSubview(refreshControl, atIndex: 0)
         tableView.dataSource = self
         tableView.delegate = self
-        TwitterClient.sharedInstance.getHomeTimeline({ (tweets: [Tweet]) -> () in
-            self.TweetArray = tweets
-            self.tableView.reloadData()
-            }, failure: { (error: NSError) -> () in
-                print(error.localizedDescription)
-        })
-        
+        reloadTweets()
         TwitterClient.sharedInstance.getUserData({ (user: User) -> () in
             print(user.name)
             }, failure: { (error: NSError) -> () in
@@ -69,6 +64,15 @@ class TweetsViewController: ViewController, UITableViewDataSource, UITableViewDe
         
     }
     
+    func reloadTweets() {
+        TwitterClient.sharedInstance.getHomeTimeline({ (tweets: [Tweet]) -> () in
+            self.TweetArray = tweets
+            self.tableView.reloadData()
+            }, failure: { (error: NSError) -> () in
+                print(error.localizedDescription)
+        })
+
+    }
     
     
     
@@ -98,10 +102,23 @@ class TweetsViewController: ViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let viewC = segue.destinationViewController as! TweetDetailsViewController
-        let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
-        let tweet = TweetArray[(indexPath!.row)]
-        viewC.tweetObj = tweet
+        if(segue.identifier == "TweetDetailsSegue"){
+            let viewC = segue.destinationViewController as! TweetDetailsViewController
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
+            let tweet = TweetArray[(indexPath!.row)]
+            viewC.tweetObj = tweet
+        } else if(segue.identifier == "profileSegue") {
+            let viewC = segue.destinationViewController as! UserViewController
+            let userButton = sender as? UIButton
+            let contentView = userButton?.superview
+            let cell = contentView?.superview as! postCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let tweet = TweetArray[(indexPath!.row)]
+            viewC.tweetObj = tweet
+ 
+        } else {
+            
+        }
  
     }
     

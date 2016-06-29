@@ -13,15 +13,21 @@ class TweetDetailsViewController: UIViewController {
     @IBOutlet weak var postText: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var userFullName: UILabel!
+    @IBOutlet weak var userFullName: UIButton!
     @IBOutlet weak var userImage: UIImageView!
-    
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    var likedPost: Bool?
+    var retweeted: Bool?
+    let onRetweetimage: UIImage = UIImage(named: "retweetOn")!
+    let offLikeimage: UIImage = UIImage(named: "like")!
+    let onLikeimage: UIImage = UIImage(named: "likeOn")!
     var tweetObj: Tweet?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         postText.text = (tweetObj?.text) as String!
-        userFullName.text = (tweetObj?.userInfo?.name!) as String!
+        userFullName.setTitle(((tweetObj?.userInfo?.name!) as String!), forState: .Normal)
         print("profileURL: \(tweetObj?.userInfo?.profileURL)")
         let url = tweetObj?.userInfo?.profileURL
         userImage.setImageWithURL(url!)
@@ -36,6 +42,17 @@ class TweetDetailsViewController: UIViewController {
         print(dateString)
         date.text = (dateString)
         
+        if(tweetObj!.liked!) {
+            likeButton.setImage(onLikeimage, forState: .Normal)
+        }
+        
+        else {
+            likeButton.setImage(offLikeimage, forState: .Normal)
+        }
+        if(tweetObj!.retweeted!) {
+            retweetButton.setImage(onRetweetimage, forState: .Normal)
+        }
+        
 
         // Do any additional setup after loading the view.
     }
@@ -44,6 +61,71 @@ class TweetDetailsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func likePost(sender: AnyObject) {
+        self.likedPost = (tweetObj?.liked) as Bool!
+        if !(self.likedPost!) {
+            performLike()
+            print("HI")
+            likeButton.setImage(onLikeimage, forState: .Normal)
+            tweetObj?.liked = true
+            likedPost = true
+            
+        }
+        else {
+            performUnlike()
+            likeButton.setImage(offLikeimage, forState: .Normal)
+            tweetObj?.liked = false
+            self.likedPost = false
+        }
+
+    }
+  
+    @IBAction func retweetButton(sender: AnyObject) {
+        self.retweeted = (tweetObj?.retweeted) as Bool!
+        if !(self.retweeted!) {
+            performRetweet()
+            retweetButton.setImage(onRetweetimage, forState: .Normal)
+            tweetObj?.retweeted = true
+            self.retweeted = true
+        }
+
+    }
+    
+    
+    func performLike() {
+        let id = tweetObj?.idStr
+        print(id!)
+        TwitterClient.sharedInstance.likePost(id!, success: {print("finallyLiked")}, failure: { (error: NSError) -> () in
+            print(error.localizedDescription)
+        })
+    }
+    
+    func performUnlike() {
+        let id = tweetObj?.idStr
+        print(id!)
+        TwitterClient.sharedInstance.unlikePost(id!, success: {print("finallyUnLiked")}, failure: { (error: NSError) -> () in
+            print(error.localizedDescription)
+        })
+        
+        
+    }
+    
+    func performRetweet() {
+        let id = tweetObj?.idStr
+        TwitterClient.sharedInstance.retweet(id!, success: {print("retweetYO")}, failure: { (error: NSError) -> () in
+            print(error.localizedDescription)
+        })
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "detailsToUser") {
+            let viewC = segue.destinationViewController as! UserViewController
+            viewC.tweetObj = self.tweetObj
+        }
+    }
+
     
 
     /*

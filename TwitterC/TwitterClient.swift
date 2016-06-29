@@ -28,26 +28,51 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    
+    
     func getUserData(success: (User)-> (), failure:(NSError)->()) {
         GET("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             let userDic = response as! NSDictionary
             let user = User(response: userDic)
             success(user)
             
-        }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-            print(error)
-        }
+            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print(error)
+        })
         
     }
     
-    func likePost(id: Int, success:()->(), failure: (NSError) ->()) {
-        
-        POST("1.1/favorites/create.json", parameters: id, progress: nil, success: nil, failure: nil)
+    func likePost(id: String, success:()->(), failure: (NSError) ->()) {
+        POST("1.1/favorites/create.json?id=\(id)", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            print("liked!")
+            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print(error)
+        })
+
 
     }
     
-    func retweet(id: Int, success:()->(), failure: (NSError) -> ()) {
-        POST("1.1/statuses/retweet/:id.json", parameters: id, progress: nil, success: nil, failure: nil)
+    
+    func unlikePost(id: String, success:()->(), failure: (NSError) ->()) {
+        POST("1.1/favorites/destroy.json?id=\(id)", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            print("unliked!")
+            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print(error)
+        })
+        
+        
+    }
+    
+    
+    
+    func retweet(id: String, success:()->(), failure: (NSError) -> ()) {
+        POST("1.1/statuses/retweet/\(id).json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            print("liked!")
+            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print(error)
+        })
+        
+        
     }
     
     

@@ -14,8 +14,13 @@ class User: NSObject {
     var descrip: NSString?
     var screenname: String?
     var dictionary: NSDictionary?
+    var statuses_count: Int?
+    var friends_count: Int?
+    var favorites_count: Int?
+    var followers_count: Int?
     //var id: String?
     static let userDidLogout = "DidLogout"
+    var coverURL: NSURL?
     
     
     init(response: NSDictionary) {
@@ -23,6 +28,11 @@ class User: NSObject {
         name = response["name"] as? String
         screenname = response["screen_name"] as? String
         descrip = response["description"] as? String
+        statuses_count = response["statuses_count"] as? Int
+        friends_count = response["friends_count"] as? Int
+        favorites_count = response["favourites_count"] as? Int
+        followers_count = response["followers_count"] as? Int
+        
         //id = response["id_str"]
         let pURL = response["profile_image_url"] as? String
         if let pURL = pURL {
@@ -30,6 +40,15 @@ class User: NSObject {
             let thingprofileURL = NSURL(string: pURL)
             profileURL = thingprofileURL as NSURL!
             print(profileURL!)
+        }
+        
+        let cURL = response["profile_banner_url"] as? String
+        print("COVERPIC\(cURL)")
+        if let cURL = cURL {
+            let thingURL = NSURL(string: cURL)
+            coverURL = thingURL as NSURL!
+            print("COVERPIC2\(coverURL)")
+            
         }
         
     }
