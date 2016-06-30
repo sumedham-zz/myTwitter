@@ -67,6 +67,7 @@ class TweetsViewController: ViewController, UITableViewDataSource, UITableViewDe
     func reloadTweets() {
         TwitterClient.sharedInstance.getHomeTimeline({ (tweets: [Tweet]) -> () in
             self.TweetArray = tweets
+            print(tweets)
             self.tableView.reloadData()
             }, failure: { (error: NSError) -> () in
                 print(error.localizedDescription)
@@ -95,8 +96,8 @@ class TweetsViewController: ViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! postCell
         cell.tweetObj = TweetArray[indexPath.row]
-        print(TweetArray[indexPath.row].userInfo)
-        print("wow")
+        //print(TweetArray[indexPath.row].userInfo)
+        //print("wow")
         return cell
    
     }

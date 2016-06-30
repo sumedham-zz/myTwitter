@@ -10,6 +10,8 @@ import UIKit
 
 class TweetDetailsViewController: UIViewController {
 
+    @IBOutlet weak var favoriteCount: UILabel!
+    @IBOutlet weak var retweetCount: UILabel!
     @IBOutlet weak var postText: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var userName: UILabel!
@@ -33,6 +35,12 @@ class TweetDetailsViewController: UIViewController {
         userImage.setImageWithURL(url!)
         userName.text = (tweetObj?.userInfo?.screenname) as String!
         
+        favoriteCount.text = String(tweetObj?.favoritesCount! as Int!)
+        print(favoriteCount.text)
+        retweetCount.text = String(tweetObj?.retweetCount! as Int!)
+        
+        
+        
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd"
         let dateNS = tweetObj?.timestamp
@@ -52,6 +60,7 @@ class TweetDetailsViewController: UIViewController {
         if(tweetObj!.retweeted!) {
             retweetButton.setImage(onRetweetimage, forState: .Normal)
         }
+
         
 
         // Do any additional setup after loading the view.

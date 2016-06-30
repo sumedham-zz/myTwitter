@@ -19,9 +19,10 @@ class postCell: UITableViewCell {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userTweet: UILabel!
     @IBOutlet weak var postTime: UILabel!
-    let onRetweetimage: UIImage = UIImage(named: "retweetOn")!
-    let offLikeimage: UIImage = UIImage(named: "like")!
-    let onLikeimage: UIImage = UIImage(named: "likeOn")!
+    let onRetweetimage = UIImage(named: "retweetOn")!
+    let offLikeimage = UIImage(named: "like")!
+    let onLikeimage = UIImage(named: "likeOn")!
+    let offRetweetImage = UIImage(named: "retweet")!
 
     
     var tweetObj: Tweet? {
@@ -32,7 +33,7 @@ class postCell: UITableViewCell {
             let url = tweetObj?.userInfo?.profileURL
             //print("NSURL: \(url)")
             userImage.setImageWithURL(url!)
-            userName.text = (tweetObj?.userInfo?.screenname) as String!
+            userName.text = "@\((tweetObj?.userInfo?.screenname) as String!)"
             
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "dd"
@@ -48,8 +49,11 @@ class postCell: UITableViewCell {
             else {
                 likeButton.setImage(offLikeimage, forState: .Normal)
             }
-            if(tweetObj!.retweeted!){
+            if(tweetObj!.retweeted!) {
                 retweetButton.setImage(onRetweetimage, forState: .Normal)
+            }
+            else{
+                retweetButton.setImage(offRetweetImage, forState: .Normal)
             }
             
 
@@ -68,6 +72,7 @@ class postCell: UITableViewCell {
             likeButton.setImage(onLikeimage, forState: .Normal)
             tweetObj?.liked = true
             likedPost = true
+            
             
         }
         else {

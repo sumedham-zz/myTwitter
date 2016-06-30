@@ -21,6 +21,7 @@
 		FCA85A4E1D23268E0025BB30 /* postCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA85A4D1D23268E0025BB30 /* postCell.swift */; };
 		FCA85A501D2353BA0025BB30 /* TweetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA85A4F1D2353BA0025BB30 /* TweetDetailsViewController.swift */; };
 		FCA85A521D2478D30025BB30 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA85A511D2478D30025BB30 /* UserViewController.swift */; };
+		FCA85A541D24A2880025BB30 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA85A531D24A2880025BB30 /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		FCA85A4D1D23268E0025BB30 /* postCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = postCell.swift; sourceTree = "<group>"; };
 		FCA85A4F1D2353BA0025BB30 /* TweetDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailsViewController.swift; sourceTree = "<group>"; };
 		FCA85A511D2478D30025BB30 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		FCA85A531D24A2880025BB30 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				FCA85A4B1D2244F40025BB30 /* TweetsViewController.swift */,
 				FCA85A2D1D21C4750025BB30 /* ViewController.swift */,
 				FCA85A4F1D2353BA0025BB30 /* TweetDetailsViewController.swift */,
+				FCA85A531D24A2880025BB30 /* PostViewController.swift */,
 				FCA85A511D2478D30025BB30 /* UserViewController.swift */,
 			);
 			name = ViewControllers;
@@ -268,6 +271,7 @@
 				FCA85A471D21F3420025BB30 /* TwitterClient.swift in Sources */,
 				FCA85A2C1D21C4750025BB30 /* AppDelegate.swift in Sources */,
 				FCA85A4E1D23268E0025BB30 /* postCell.swift in Sources */,
+				FCA85A541D24A2880025BB30 /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
