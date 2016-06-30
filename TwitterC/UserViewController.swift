@@ -9,7 +9,7 @@
 import UIKit
 import AFNetworking
 
-class UserViewController: UIViewController {
+class UserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var coverImage: UIImageView!
     @IBOutlet weak var profPic: UIImageView!
@@ -18,20 +18,22 @@ class UserViewController: UIViewController {
     @IBOutlet weak var numTweetsLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followersCount: UILabel!
-    
+    @IBOutlet weak var tableView: UITableView!
     var tweetObj: Tweet?
+    var tweetArray: [Tweet] = []
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+        reloadTweets()
         nameLabel.setTitle(((tweetObj?.userInfo?.name!) as String!), forState: .Normal)
         print("profileURL: \(tweetObj?.userInfo?.profileURL)")
         
         let url = tweetObj?.userInfo?.profileURL
         profPic.setImageWithURL(url!)
         usernameLabel.text = (tweetObj?.userInfo?.screenname) as String!
-        
         numTweetsLabel.text = String((tweetObj?.userInfo?.statuses_count)!)
         followingLabel.text = String((tweetObj?.userInfo?.friends_count)!)
         followersCount.text = String((tweetObj?.userInfo?.followers_count)!)
@@ -39,23 +41,37 @@ class UserViewController: UIViewController {
         if let urlC = urlC {
             coverImage.setImageWithURL(urlC)
         }
-        
-        
-        
-        
-        
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.dateFormat = "dd"
-//        let dateNS = tweetObj?.timestamp
-//        print(dateNS)
-//        print("dateee")
-//        let dateString = dateFormatter.stringFromDate(dateNS!)
-//        print(dateString)
-//        date.text = (dateString)
 
-        
-        // Do any additional setup after loading the view.
     }
+    
+    func reloadTweets() {
+        let name = (tweetObj?.userInfo?.screenname!) as String!
+        print(name)
+        TwitterClient.sharedInstance.getUserTimeLine(name, success: {(tweets: [Tweet]) -> () in
+            self.tweetArray = tweets
+            self.tableView.reloadData()
+            }, failure: { (error: NSError) -> () in
+                print(error.localizedDescription)
+        })
+        
+    }
+
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tweetArray.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! postCell
+        cell.tweetObj = tweetArray[indexPath.row]
+        //print(TweetArray[indexPath.row].userInfo)
+        //print("wow")
+        return cell
+
+    }
+    
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

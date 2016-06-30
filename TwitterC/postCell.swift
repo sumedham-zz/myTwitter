@@ -30,19 +30,13 @@ class postCell: UITableViewCell {
             userTweet.text = (tweetObj?.text) as String!
             userFullName.setTitle(((tweetObj?.userInfo?.name!) as String!), forState: .Normal)
             print("profileURL: \(tweetObj?.userInfo?.profileURL)")
-            let url = tweetObj?.userInfo?.profileURL
-            //print("NSURL: \(url)")
+            let url = tweetObj?.userInfo?.profileURL!
             userImage.setImageWithURL(url!)
             userName.text = "@\((tweetObj?.userInfo?.screenname) as String!)"
             
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "dd"
-            let dateNS = tweetObj?.timestamp
-            print(dateNS)
-            print("dateee")
-            let dateString = dateFormatter.stringFromDate(dateNS!)
-            print(dateString)
-            postTime.text = (dateString)
+            postTime.text = (tweetObj?.timestamp) as String!
+            
+            
             if tweetObj!.liked! {
                 likeButton.setImage(onLikeimage, forState: .Normal)
             }

@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import RelativeFormatter
 
 class Tweet: NSObject {
     var text: NSString?
-    var timestamp: NSDate?
+    var timestamp: String?
     var retweetCount: Int?
     var favoritesCount: Int?
     var idStr: String?
@@ -39,9 +40,9 @@ class Tweet: NSObject {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         if let timestampString = timestampString {
-            timestamp = formatter.dateFromString(timestampString)
+            let timestampdate = formatter.dateFromString(timestampString)
+            timestamp = timestampdate!.relativeFormatted(precision:Precision.Day)
         }
-        
     }
     
     class func tweetsWithArray(dics: [NSDictionary])-> [Tweet] {

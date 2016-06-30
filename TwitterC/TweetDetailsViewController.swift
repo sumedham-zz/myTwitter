@@ -33,23 +33,13 @@ class TweetDetailsViewController: UIViewController {
         print("profileURL: \(tweetObj?.userInfo?.profileURL)")
         let url = tweetObj?.userInfo?.profileURL
         userImage.setImageWithURL(url!)
-        userName.text = (tweetObj?.userInfo?.screenname) as String!
+        userName.text = "@\((tweetObj?.userInfo?.screenname) as String!)"
         
         favoriteCount.text = String(tweetObj?.favoritesCount! as Int!)
         print(favoriteCount.text)
         retweetCount.text = String(tweetObj?.retweetCount! as Int!)
-        
-        
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd"
-        let dateNS = tweetObj?.timestamp
-        print(dateNS)
-        print("dateee")
-        let dateString = dateFormatter.stringFromDate(dateNS!)
-        print(dateString)
-        date.text = (dateString)
-        
+        date.text = (tweetObj?.timestamp) as String!
+
         if(tweetObj!.liked!) {
             likeButton.setImage(onLikeimage, forState: .Normal)
         }

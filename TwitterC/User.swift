@@ -35,8 +35,8 @@ class User: NSObject {
         
         //id = response["id_str"]
         let pURL = response["profile_image_url"] as? String
-        if let pURL = pURL {
-            print("made it")
+        if var pURL = pURL {
+            pURL = pURL.stringByReplacingOccurrencesOfString("_normal", withString: "_bigger")
             let thingprofileURL = NSURL(string: pURL)
             profileURL = thingprofileURL as NSURL!
             print(profileURL!)
@@ -44,7 +44,8 @@ class User: NSObject {
         
         let cURL = response["profile_banner_url"] as? String
         print("COVERPIC\(cURL)")
-        if let cURL = cURL {
+        if var cURL = cURL {
+            cURL = cURL.stringByReplacingOccurrencesOfString("_normal", withString: "_bigger")
             let thingURL = NSURL(string: cURL)
             coverURL = thingURL as NSURL!
             print("COVERPIC2\(coverURL)")
