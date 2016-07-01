@@ -12,6 +12,7 @@ import BDBOAuth1Manager
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var birdPic: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,11 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        UIView.animateWithDuration(1.5) {
+            self.birdPic.transform = CGAffineTransformMakeScale(2, 2)
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -33,7 +33,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let url = tweetObj?.userInfo?.profileURL
         profPic.setImageWithURL(url!)
-        usernameLabel.text = (tweetObj?.userInfo?.screenname) as String!
+        usernameLabel.text = "@\((tweetObj?.userInfo?.screenname) as String!)"
         numTweetsLabel.text = String((tweetObj?.userInfo?.statuses_count)!)
         followingLabel.text = String((tweetObj?.userInfo?.friends_count)!)
         followersCount.text = String((tweetObj?.userInfo?.followers_count)!)
@@ -76,6 +76,15 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "TweetDetailsSegue1"){
+            let viewC = segue.destinationViewController as! TweetDetailsViewController
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
+            let tweet = tweetArray[(indexPath!.row)]
+            viewC.tweetObj = tweet
+        }
     }
     
 

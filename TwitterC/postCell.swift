@@ -19,6 +19,7 @@ class postCell: UITableViewCell {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userTweet: UILabel!
     @IBOutlet weak var postTime: UILabel!
+    
     let onRetweetimage = UIImage(named: "retweetOn")!
     let offLikeimage = UIImage(named: "like")!
     let onLikeimage = UIImage(named: "likeOn")!
@@ -27,6 +28,7 @@ class postCell: UITableViewCell {
     
     var tweetObj: Tweet? {
         didSet {
+            userFullName.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             userTweet.text = (tweetObj?.text) as String!
             userFullName.setTitle(((tweetObj?.userInfo?.name!) as String!), forState: .Normal)
             print("profileURL: \(tweetObj?.userInfo?.profileURL)")
@@ -113,6 +115,7 @@ class postCell: UITableViewCell {
         let id = tweetObj?.idStr
         TwitterClient.sharedInstance.retweet(id!, success: {print("finallyUnLiked")}, failure: { (error: NSError) -> () in
             print(error.localizedDescription)
+            
         })
         
     }

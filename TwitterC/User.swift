@@ -11,7 +11,7 @@ import UIKit
 class User: NSObject {
     var name: String?
     var profileURL: NSURL?
-    var descrip: NSString?
+    var descrip: String?
     var screenname: String?
     var dictionary: NSDictionary?
     var statuses_count: Int?
@@ -24,6 +24,7 @@ class User: NSObject {
     
     
     init(response: NSDictionary) {
+        print("this is nil\(response)")
         dictionary = response as? NSDictionary
         name = response["name"] as? String
         screenname = response["screen_name"] as? String

@@ -28,6 +28,8 @@ class TweetDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userFullName.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+        
         postText.text = (tweetObj?.text) as String!
         userFullName.setTitle(((tweetObj?.userInfo?.name!) as String!), forState: .Normal)
         print("profileURL: \(tweetObj?.userInfo?.profileURL)")
@@ -69,6 +71,7 @@ class TweetDetailsViewController: UIViewController {
             likeButton.setImage(onLikeimage, forState: .Normal)
             tweetObj?.liked = true
             likedPost = true
+            favoriteCount.text = String(Int(favoriteCount.text!)!+1)
             
         }
         else {
@@ -76,6 +79,7 @@ class TweetDetailsViewController: UIViewController {
             likeButton.setImage(offLikeimage, forState: .Normal)
             tweetObj?.liked = false
             self.likedPost = false
+            favoriteCount.text = String(Int(favoriteCount.text!)!-1)
         }
 
     }
@@ -86,7 +90,9 @@ class TweetDetailsViewController: UIViewController {
             performRetweet()
             retweetButton.setImage(onRetweetimage, forState: .Normal)
             tweetObj?.retweeted = true
+            
             self.retweeted = true
+            retweetCount.text = String(Int(retweetCount.text!)!+1)
         }
 
     }

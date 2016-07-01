@@ -24,7 +24,6 @@ class Tweet: NSObject {
     var userInfo: User?
     
     init(response: NSDictionary) {
-        print(response)
         text = response["text"] as? String
         retweetCount = (response["retweet_count"] as? Int) ?? 0
         favoritesCount = (response["favorite_count"] as? Int) ?? 0

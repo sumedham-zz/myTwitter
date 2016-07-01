@@ -34,7 +34,6 @@ class TweetsViewController: ViewController, UITableViewDataSource, UITableViewDe
         //getting data
         
         super.viewDidLoad()
-        
         // Initialize a UIRefreshControl
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
@@ -42,12 +41,6 @@ class TweetsViewController: ViewController, UITableViewDataSource, UITableViewDe
         tableView.dataSource = self
         tableView.delegate = self
         reloadTweets()
-        TwitterClient.sharedInstance.getUserData({ (user: User) -> () in
-            print(user.name)
-            }, failure: { (error: NSError) -> () in
-                print(error.localizedDescription)
-        })
-        
 
         // Do any additional setup after loading the view.
     }
@@ -67,13 +60,14 @@ class TweetsViewController: ViewController, UITableViewDataSource, UITableViewDe
     func reloadTweets() {
         TwitterClient.sharedInstance.getHomeTimeline({ (tweets: [Tweet]) -> () in
             self.TweetArray = tweets
-            print(tweets)
             self.tableView.reloadData()
             }, failure: { (error: NSError) -> () in
                 print(error.localizedDescription)
         })
 
     }
+    
+   
     
     
     
