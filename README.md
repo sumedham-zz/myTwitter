@@ -58,7 +58,9 @@ http://i.imgur.com/QFKd0Wf.gif
 
 <img src='http://i.imgur.com/Ct1SSDr.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 http://i.imgur.com/Ct1SSDr.gif
+
 <img src='http://i.imgur.com/ZXRyiOc.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+http://i.imgur.com/ZXRyiOc.gif
 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
