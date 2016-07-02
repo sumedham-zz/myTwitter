@@ -50,10 +50,15 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://img.tejen.net/f4f0efb88b0f2c75175ea1a88ad61528.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-<img src='http://img.tejen.net/f18b6f0cad95b6ea761e99e2b7e199f8.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-<img src='http://img.tejen.net/ebed5d973682e40d93bdbb9b5c3356c7.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-<img src='http://img.tejen.net/45cb755c98f9d4e3510a94f23f61d76c.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/G0PVoat.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+http://i.imgur.com/G0PVoat.gif
+
+<img src='http://i.imgur.com/QFKd0Wf.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+http://i.imgur.com/QFKd0Wf.gif
+
+<img src='http://i.imgur.com/Ct1SSDr.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+http://i.imgur.com/Ct1SSDr.gif
+<img src='http://i.imgur.com/ZXRyiOc.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
